@@ -5,12 +5,18 @@
 }
 
 .carousel-container-custom{
-  max-width: 800px;
-  aspect-ratio: 16/9;
+  width: 800px;
+  max-height: 500px;
+}
+
+.carousel-container-custom img{
+  width: 800px;
+  max-height: 500px;
 }
 
 .image-text {
-  right: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  right: 0;
   bottom: 0;
 }
 
@@ -20,6 +26,6 @@
 }
 
 .thumbnail-image {
-  border: 2px solid white;
+  border: 3px solid white;
   flex-basis: calc(100% / 5);
 }

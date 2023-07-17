@@ -1,3 +1,11 @@
+"use strict"
+
+let carouselContainer = document.querySelector(".carousel-container-custom");
+const btnNext = document.querySelector(".btn-next");
+const btnPrevious = document.querySelector(".btn-prev");
+const thumbnailImages = document.querySelectorAll(".thumbnail-image")
+let imageCounter = 0;
+
 const images = [
   {
       image: 'img/01.webp',
@@ -21,3 +29,61 @@ const images = [
       text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
   }
 ];
+
+//stampa sempre come prima cosa la prima immagine ed evidenzia la rispettiva miniatura
+carouselContainer.innerHTML += `<div class="image-text position-absolute text-light text-end">
+<h6>${images[0].title}</h6>
+<p>${images[0].text}</p>
+</div>
+<img src="./${images[0].image}" alt="" class="w-100 object-fit-cover h-100">`
+
+thumbnailImages[imageCounter].classList.add("border-primary", "opacity-50")
+
+
+//button che permette di vedere l'immagine successiva
+btnNext.addEventListener("click", nextImage)
+
+//button che permettte di vedere l'immagine precedente
+btnPrevious.addEventListener("click", prevImage)
+
+function nextImage() {
+  carouselContainer.innerHTML = ""
+  thumbnailImages[imageCounter].classList.remove("border-primary", "opacity-50")
+
+  if (imageCounter === images.length -1) {
+    imageCounter = 0;
+  } else {
+    imageCounter++
+  }
+
+  thumbnailImages[imageCounter].classList.add("border-primary", "opacity-50")
+  
+  carouselContainer.innerHTML += `<div class="image-text position-absolute text-light text-end">
+  <h6>${images[imageCounter].title}</h6>
+  <p>${images[imageCounter].text}</p>
+  </div>
+  <img src="./${images[imageCounter].image}" alt="" class="w-100 h-100">`
+}
+
+function prevImage() {
+  carouselContainer.innerHTML = ""
+  thumbnailImages[imageCounter].classList.remove("border-primary", "opacity-50")
+
+  if (imageCounter === 0) {
+    imageCounter = images.length -1;
+  } else {
+    imageCounter--
+  }
+
+  thumbnailImages[imageCounter].classList.add("border-primary", "opacity-50")
+  
+  carouselContainer.innerHTML += `<div class="image-text position-absolute text-light text-end">
+  <h6>${images[imageCounter].title}</h6>
+  <p>${images[imageCounter].text}</p>
+  </div>
+  <img src="./${images[imageCounter].image}" alt="" class="w-100 h-100">`
+
+  return
+}
+
+setInterval(nextImage, 3000);

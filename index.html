@@ -5,11 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+  integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Carousel</title>
 </head>
 <body>
 
-  
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-1">
+        <div class="h-100 d-flex align-items-center">
+          <button class="btn btn-prev rounded-circle bg-info"><i class="fa-solid fa-chevron-left"></i></button>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="carousel-container-custom m-auto position-relative mt-5">
+        </div>
+
+        <div class="thumbnail bg-dark m-auto d-flex">
+          <div class="thumbnail-image">
+            <img class="object-fit-fill h-100 w-100" src="./img/01.webp" alt="">
+          </div>
+          <div class="thumbnail-image">
+            <img class="object-fit-fill h-100 w-100" src="./img/02.webp" alt="">
+          </div>
+          <div class="thumbnail-image">
+            <img class="object-fit-fill h-100 w-100" src="./img/03.webp" alt="">
+          </div>
+          <div class="thumbnail-image">
+            <img class="object-fit-fill h-100 w-100" src="./img/04.webp" alt="">
+          </div>
+          <div class="thumbnail-image">
+            <img class="object-fit-fill h-100 w-100" src="./img/05.webp" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-1">
+        <div class="h-100 d-flex align-items-center">
+          <button class="btn btn-next rounded-circle bg-info"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>      
+      </div>
+    </div>
+  </div>
   
   <script src="./script/main.js"></script>
 </body>

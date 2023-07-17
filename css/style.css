@@ -3,3 +3,23 @@
   margin: 0;
   padding: 0;
 }
+
+.carousel-container-custom{
+  max-width: 800px;
+  aspect-ratio: 16/9;
+}
+
+.image-text {
+  right: 20px;
+  bottom: 0;
+}
+
+.thumbnail {
+  width: 800px;
+  height: 100px;
+}
+
+.thumbnail-image {
+  border: 2px solid white;
+  flex-basis: calc(100% / 5);
+}

@@ -4,12 +4,16 @@ let carouselContainer = document.querySelector(".carousel-container-custom");
 const btnNext = document.querySelector(".btn-next");
 const btnPrevious = document.querySelector(".btn-prev");
 const thumbnailImages = document.querySelectorAll(".thumbnail-image")
+const btnPause = document.querySelector(".btn-pause");
+const btnPlay = document.querySelector(".btn-play");
+const btnBackward = document.querySelector(".btn-backward");
+const btnForward = document.querySelector(".btn-forward");
 let imageCounter = 0;
 
 const images = [
   {
     image: 'img/01.webp',
-    title: 'Marvel\'s Spiderman Miles Morale',
+    title: 'Marvel\'s Spiderman Miles Morales',
     text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
   }, {
     image: 'img/02.webp',
@@ -31,20 +35,31 @@ const images = [
 ];
 
 //stampa sempre come prima cosa la prima immagine ed evidenzia la rispettiva miniatura
-carouselContainer.innerHTML += `<div class="image-text w-100 position-absolute text-light text-end pe-3">
-<h6>${images[0].title}</h6>
-<p>${images[0].text}</p>
-</div>
-<img src="./${images[0].image}" alt="" class="object-fit-contain rounded">`
-
+createCarouselEl(imageCounter)
 thumbnailImages[imageCounter].classList.add("border-primary", "opacity-50")
+
+
+
+//aggiunge ad ogni miniatura un eventlistener per far comparire la rispettiva immagine principale
+thumbnailImages.forEach(function(thumbnail, i) {
+  thumbnail.addEventListener("click", function() {
+    console.log("hai cliccato sulla thumbnail numero: ", i);
+
+    carouselContainer.innerHTML = ""
+    thumbnailImages[imageCounter].classList.remove("border-primary", "opacity-50")
+
+    imageCounter = i;
+
+    thumbnailImages[imageCounter].classList.add("border-primary", "opacity-50")
+
+    createCarouselEl(imageCounter)
+ })
+})
+
 
 
 //button che permette di vedere l'immagine successiva
 btnNext.addEventListener("click", nextImage)
-
-//button che permettte di vedere l'immagine precedente
-btnPrevious.addEventListener("click", prevImage)
 
 function nextImage() {
   carouselContainer.innerHTML = ""
@@ -57,13 +72,11 @@ function nextImage() {
   }
 
   thumbnailImages[imageCounter].classList.add("border-primary", "opacity-50")
-
-  carouselContainer.innerHTML += `<div class="image-text w-100 position-absolute text-light text-end pe-3">
-  <h6>${images[imageCounter].title}</h6>
-  <p>${images[imageCounter].text}</p>
-  </div>
-  <img src="./${images[imageCounter].image}" alt="" class="object-fit-contain rounded">`
+  createCarouselEl(imageCounter)
 }
+
+//button che permettte di vedere l'immagine precedente
+btnPrevious.addEventListener("click", prevImage)
 
 function prevImage() {
   carouselContainer.innerHTML = ""
@@ -77,13 +90,53 @@ function prevImage() {
 
   thumbnailImages[imageCounter].classList.add("border-primary", "opacity-50")
 
+  // carouselContainer.innerHTML += `<div class="image-text w-100 position-absolute text-light text-end pe-3">
+  // <h6>${images[imageCounter].title}</h6>
+  // <p>${images[imageCounter].text}</p>
+  // </div>
+  // <img src="./${images[imageCounter].image}" alt="" class="object-fit-contain rounded">`
+
+  createCarouselEl(imageCounter)
+  return
+}
+
+
+//crea il singolo elemento da far comparire nel carosello
+function createCarouselEl(imageCounter) {
   carouselContainer.innerHTML += `<div class="image-text w-100 position-absolute text-light text-end pe-3">
   <h6>${images[imageCounter].title}</h6>
   <p>${images[imageCounter].text}</p>
   </div>
   <img src="./${images[imageCounter].image}" alt="" class="object-fit-contain rounded">`
-
-  return
 }
 
-setInterval(nextImage, 3000);
+
+
+//inizializzo l'intervallo per far scorrere le immagini
+let interval = setInterval(nextImage, 3000);
+
+//button che mette in pausa lo scorrimento delle immagini
+btnPause.addEventListener("click", function() {
+  console.log("Hai messo in pausa il carosello")
+  interval = clearInterval(interval);
+})
+
+//button che fa ripartire lo scorrimento delle immagini
+btnPlay.addEventListener("click", function() {
+  console.log("Hai avviato il carosello")
+  interval = setInterval(nextImage, 3000);
+})
+
+//button che fa scorrere le immagini al contrario
+btnBackward.addEventListener("click", function() {
+  interval = clearInterval(interval)
+  console.log("Hai fatto scorrere il carosello al contrario")
+  interval = setInterval(prevImage, 3000);
+})
+
+//button che fa scorrere le immagini dalla prima all'ultima
+btnForward.addEventListener("click", function() {
+  interval = clearInterval(interval)
+  console.log("Hai fatto scorrere il carosello al contrario")
+  interval = setInterval(nextImage, 3000);
+})

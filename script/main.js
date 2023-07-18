@@ -90,12 +90,6 @@ function prevImage() {
 
   thumbnailImages[imageCounter].classList.add("border-primary", "opacity-50")
 
-  // carouselContainer.innerHTML += `<div class="image-text w-100 position-absolute text-light text-end pe-3">
-  // <h6>${images[imageCounter].title}</h6>
-  // <p>${images[imageCounter].text}</p>
-  // </div>
-  // <img src="./${images[imageCounter].image}" alt="" class="object-fit-contain rounded">`
-
   createCarouselEl(imageCounter)
   return
 }
@@ -123,6 +117,7 @@ btnPause.addEventListener("click", function() {
 
 //button che fa ripartire lo scorrimento delle immagini
 btnPlay.addEventListener("click", function() {
+  clearInterval(interval)
   console.log("Hai avviato il carosello")
   interval = setInterval(nextImage, 3000);
 })
